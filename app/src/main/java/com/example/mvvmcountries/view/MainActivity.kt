@@ -1,4 +1,4 @@
-package com.example.mvvmcountries
+package com.example.mvvmcountries.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

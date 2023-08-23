@@ -30,11 +30,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -46,17 +46,16 @@ android {
 
 val lifecycle_version = "2.6.1"
 val room_version = "2.5.2"
-val nav_version = "2.7.0"
+val nav_version = "2.6.0"
 val retrofitVersion = "2.9.0"
 val rxJavaVersion = "2.2.9"
 val rxAndroidVersion = "2.1.1"
 val glideVersion = "4.11.0"
-val supportVersion = "28.0.0"
 val preferencesVersion = "1.2.1"
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.10.1.0")
+    implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
@@ -102,11 +101,6 @@ dependencies {
     implementation ("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion")
 
     implementation ("com.github.bumptech.glide:glide:$glideVersion")
-
-    //noinspection GradleCompatible
-    implementation ("com.android.support:palette-v7:$supportVersion")
-    //noinspection GradleCompatible
-    implementation ("com.android.support:design:$supportVersion")
 
     //preference
     implementation ("androidx.preference:preference:$preferencesVersion")
