@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "com.example.mvvmcountries"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.mvvmcountries"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -46,7 +46,7 @@ android {
 
 val lifecycle_version = "2.6.1"
 val room_version = "2.5.2"
-val nav_version = "2.6.0"
+val nav_version = "2.7.0"
 val retrofitVersion = "2.9.0"
 val rxJavaVersion = "2.2.9"
 val rxAndroidVersion = "2.1.1"
