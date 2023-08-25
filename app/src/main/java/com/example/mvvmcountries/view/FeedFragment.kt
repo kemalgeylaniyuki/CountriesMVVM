@@ -46,6 +46,14 @@ class FeedFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = countryAdapter
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.recyclerView.visibility = View.GONE
+            binding.countryError.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
+            viewModel.refreshData()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
         observeLivedData()
 
     }

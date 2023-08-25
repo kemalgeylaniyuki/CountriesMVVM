@@ -3,8 +3,16 @@ package com.example.mvvmcountries.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mvvmcountries.model.Country
+import com.example.mvvmcountries.service.CountryAPIService
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 
 class FeedViewModel : ViewModel() {
+
+    private val countryAPIService = CountryAPIService()
+    private val compositeDisposable = CompositeDisposable()
 
     val countries = MutableLiveData<List<Country>>()
     val countryError = MutableLiveData<Boolean>()
@@ -12,15 +20,36 @@ class FeedViewModel : ViewModel() {
 
     fun refreshData(){
 
-        val c1 = Country("T","A","A","T","www.img.com","T")
-        val c2 = Country("F","P","E","E","www.img.com","F")
-        val c3 = Country("G","B","E","E","www.img.com","D")
+        getDataFromAPI()
 
-        val countryList = arrayListOf<Country>(c1,c2,c3)
+    }
 
-        countries.value = countryList
-        countryError.value = false
-        countryLoading.value = false
+    fun getDataFromAPI(){
+
+        countryLoading.value = true
+
+        compositeDisposable.add(countryAPIService.getData()
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(object : DisposableSingleObserver<List<Country>>(){
+                override fun onSuccess(t: List<Country>) {
+
+                    countries.value = t
+                    countryLoading.value = false
+                    countryError.value = false
+
+                }
+
+                override fun onError(e: Throwable) {
+
+                    countryLoading.value = false
+                    countryError.value = true
+                    e.printStackTrace()
+
+                }
+
+            })
+        )
 
     }
 
