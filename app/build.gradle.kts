@@ -45,7 +45,7 @@ android {
 }
 
 val lifecycle_version = "2.6.1"
-val room_version = "2.5.2"
+val room_version = "2.6.0-beta01"
 val nav_version = "2.7.0"
 val retrofitVersion = "2.9.0"
 val rxJavaVersion = "2.2.9"

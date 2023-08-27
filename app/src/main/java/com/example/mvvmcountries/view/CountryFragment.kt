@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.mvvmcountries.R
 import com.example.mvvmcountries.databinding.FragmentCountryBinding
+import com.example.mvvmcountries.util.downloadFromURL
+import com.example.mvvmcountries.util.placeHolderProgressBar
 import com.example.mvvmcountries.viewmodel.CountryViewModel
 
 class CountryFragment : Fragment() {
@@ -37,14 +39,14 @@ class CountryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
-        viewModel.getDataFromRoom()
-
-        observeLiveData()
-
         arguments?.let {
             counrtyUUID = CountryFragmentArgs.fromBundle(it).countryUUID
         }
+
+        viewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
+        viewModel.getDataFromRoom(counrtyUUID)
+
+        observeLiveData()
 
     }
 
@@ -57,6 +59,11 @@ class CountryFragment : Fragment() {
                 binding.countryRegion.text = it.region
                 binding.countryCurrency.text = it.currency
                 binding.countryLanguage.text = it.language
+
+                context?.let {
+                    binding.countryImage.downloadFromURL(country.imageURL, placeHolderProgressBar(it))
+                }
+
             }
         })
 

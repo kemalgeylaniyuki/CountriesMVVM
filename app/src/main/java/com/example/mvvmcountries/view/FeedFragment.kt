@@ -50,7 +50,7 @@ class FeedFragment : Fragment() {
             binding.recyclerView.visibility = View.GONE
             binding.countryError.visibility = View.GONE
             binding.progressBar.visibility = View.VISIBLE
-            viewModel.refreshData()
+            viewModel.refreshFromAPI()
             binding.swipeRefreshLayout.isRefreshing = false
         }
 
